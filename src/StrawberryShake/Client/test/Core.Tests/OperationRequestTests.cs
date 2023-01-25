@@ -534,6 +534,48 @@ public class OperationRequestTests
         // assert
         Assert.True(a.Equals(b));
     }
+    
+    [Fact]
+    public void Equals_With_Variables_KeyValuePair()
+    {
+
+        // arrange
+        var a = new OperationRequest(
+            EventQueryDocument.Instance.Hash.Value,
+            "Event",
+            EventQueryDocument.Instance,
+            new Dictionary<string, object?>
+            {
+                { "a", new List<KeyValuePair<string, object?>>
+                    {
+                        new KeyValuePair<string, object?>("b", new List<KeyValuePair<string, object?>>
+                        {
+                            new KeyValuePair<string, object?>("id", "123456")
+                        })
+                    }
+                }
+            });
+
+        var b = new OperationRequest(
+            EventQueryDocument.Instance.Hash.Value,
+            "Event",
+            EventQueryDocument.Instance,
+            new Dictionary<string, object?>
+            {
+                { "a", new List<KeyValuePair<string, object?>>
+                    {
+                        new KeyValuePair<string, object?>("b", new List<KeyValuePair<string, object?>>
+                        {
+                            new KeyValuePair<string, object?>("id", "123456")
+                        })
+                    }
+                }
+            });
+
+        // act
+        // assert
+        Assert.True(a.Equals(b));
+    }
 
     [Fact]
     public void Equals_No_Variables()
